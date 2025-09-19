@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Scenario Draw</title>
+<style>
+  body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: #008691;
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+  }
+
+  .container {
+    background: #ffffffdd;
+    padding: 2rem;
+    border-radius: 20px;
+    text-align: center;
+    width: 90%;
+    max-width: 600px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+    color: #333;
+  }
+
+  h1 {
+    margin-bottom: 1rem;
+    color: #008691;
+    font-size: 1.6rem;
+  }
+
+  button {
+    font-size: 1.1rem;
+    padding: 0.75rem 1.5rem;
+    border: none;
+    border-radius: 30px;
+    background-color: #008691;
+    color: #fff;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+
+  button:hover {
+    background-color: #F36085;
+  }
+
+  #scenario {
+    margin-top: 1.5rem;
+    font-size: 1.2rem;
+    font-weight: bold;
+    padding: 1.2rem;
+    border-radius: 15px;
+    background: linear-gradient(135deg, #00869122, #F3608522);
+    min-height: 120px;   
+    max-height: 120px;   
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start; 
+    text-align: left;
+    overflow: hidden;
+  }
+
+
+  /* Mobile adjustments */
+  @media (max-width: 480px) {
+    h1 {
+      font-size: 1.3rem;
+    }
+    button {
+      font-size: 1rem;
+      padding: 0.6rem 1.2rem;
+    }
+    #scenario {
+      font-size: 1rem;
+      padding: 1rem;
+      min-height: 100px;
+      max-height: 100px;
+    }
+  }
+</style>
+</head>
+<body>
+  <div class="container">
+    <h1>Scenario Draw for Workshop</h1>
+    <button onclick="drawScenario()">🎲 Draw a scenario</button>
+    <div id="scenario">Click the button to draw a scenario</div>
+  </div>
+
+<script>
+  const allScenarios = [
+    ["You are a researcher at a lecture on Electronic Information Sources.", 
+     "During the Open Access section, you openly state that with Sci-Hub, OA is not really necessary."],
+    ["You are a researcher who stops your data steward in the hallway.", 
+     "You ask whether it’s fine to submit an empty Data Management Plan (DMP), because 'nobody checks it anyway'."],
+    ["You are a researcher attending a training on Data Management Plans.", 
+     "You feel frustrated by the administrative burden and complain that you would rather do experiments, since you don’t see the value of a DMP."],
+    ["You are a researcher in a project group meeting about new Open Science policies.", 
+     "You express your concern that making data openly available will lead to it being stolen."],
+    ["You are a researcher at a conference session on Open Science funding.", 
+     "You feel frustrated and argue that the requirements take too much of your budget unnecessarily."],
+    ["You are a researcher at a conference on Open Science.", 
+     "During a coffee break, you approach a data steward to ask who actually pays for Open Science."]
+  ];
+
+  let remainingScenarios = [...allScenarios];
+
+  function drawScenario() {
+    if (remainingScenarios.length === 0) {
+      remainingScenarios = [...allScenarios];
+    }
+
+    const idx = Math.floor(Math.random() * remainingScenarios.length);
+    const [setting, action] = remainingScenarios.splice(idx, 1)[0]; 
+
+    document.getElementById('scenario').innerHTML = `
+      <div>${setting}</div>
+      <div>${action}</div>
+    `;
+  }
+</script>
+</body>
+</html>
